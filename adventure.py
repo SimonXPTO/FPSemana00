@@ -5,6 +5,18 @@ room_descriptions = [
     ["P","Q","R","S","T"],
     ["U","V","W","X","Y"]
 ]
+room_exits = [
+[(False, False, True, False ), (False, True, False, False ), (False, True, True, True), (False, True, True, True), (False, False, True, True ) ],
+[ (True, False, True, False ), (False, True, True, False ), (True, True, True, True ), (True, False, False, True), (True, False, True, False ) ],
+[ (True, False, True, False ), (True, False, False, False ), (True, False, True, False ), (False, True, False, False ), (True, False, True, True)],
+[ (True, False, True, False ), (False, True, True, False ), ( True, True, False, True), (False, True, False, True ), ( True, False, True, False) ],
+[(True, True, False, False ), (True, False, False, True ), (False, False, False, False ), (True, False, False, False ), ( True, False, False, False) ]
+]
+NORTH=0
+EAST=1
+SOUTH=2
+WEST=3
+
 position=(2,2)
 
 while (True):
@@ -16,20 +28,33 @@ while (True):
     command = input()
 
     if command == "north":
-        print("You move north...")
-        y=y-1
+        if (room_exits[y][x][NORTH]):
+            print("You move north...")
+            y=y-1
+        else:
+            print("Can't move north!")
     elif command =="south":
-        print("YOu move south")
-        y=y+1
+        if (room_exits[y][x][SOUTH]):
+            print("You move south")
+            y=y+1
+        else:
+            print("Can't move south!")
     elif command=="east":
-        print("heading east...")
-        x=x+1
+        if (room_exits[y][x][EAST]):
+            print("heading east...")
+            x=x+1
+        else:
+            print("Can't move east!")
     elif command=="west":
-        print("heading west...")
-        x-=1
+        if (room_exits[y][x][WEST]):
+            print("heading west...")
+            x-=1
+        else:
+            print("Can't move west!")
     elif command=="goodbye":
         break
     else:
         print("i don't understand " + command)
 
     position = (x,y)
+    
